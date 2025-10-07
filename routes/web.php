@@ -1,11 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController; // tambahkan ini!
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function () {
-    return view('home');
-});
+// Gunakan hanya route controller untuk /home
+Route::get('/home', [HomeController::class, 'index']);

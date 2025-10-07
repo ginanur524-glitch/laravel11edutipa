@@ -1,149 +1,133 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduLearn - Home</title>
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>EduLearn - Perpustakaan Digital</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(180deg, #c7d2fe 0%, #a5b4fc 40%, #e0e7ff 90%);
+      background-attachment: fixed;
+      overflow-x: hidden;
+    }
+    .title-font {
+      font-family: 'Playfair Display', serif;
+    }
+    .glass {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+    .magic-border {
+      border: 1px solid rgba(147, 197, 253, 0.6);
+    }
+    .star {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: twinkle 3s infinite ease-in-out;
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.4); }
+    }
 
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #ffffff; /* putih */
-            margin: 0;
-            padding: 0;
-        }
+    .nav-link {
+      position: relative;
+      padding: 0.5rem 1rem;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
 
-        /* Navbar */
-        nav {
-            background-color: #007bff; /* biru utama */
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        nav .navbar-brand {
-            color: white;
-            font-weight: 700;
-            font-size: 22px;
-        }
-        nav .nav-link {
-            color: #e3f2fd !important;
-            margin-right: 15px;
-            font-weight: 500;
-        }
-        nav .nav-link:hover {
-            color: #ffffff !important;
-        }
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0%;
+      height: 2px;
+      background: linear-gradient(to right, #a5b4fc, #93c5fd);
+      transition: all 0.4s ease;
+      border-radius: 2px;
+    }
 
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #cce5ff, #e3f2fd); /* biru muda-putih */
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: #0d47a1; /* biru gelap */
-            padding: 20px;
-        }
-        .hero h1 {
-            font-size: 56px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #0056b3;
-        }
-        .hero p {
-            font-size: 20px;
-            color: #374151;
-            max-width: 700px;
-        }
-        .btn-custom {
-            margin-top: 25px;
-            padding: 12px 30px;
-            font-size: 18px;
-            border-radius: 30px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            transition: 0.3s;
-        }
-        .btn-custom:hover {
-            background-color: #0056b3;
-        }
+    .nav-link:hover {
+      color: #e0e7ff;
+      text-shadow: 0 0 8px rgba(165, 180, 252, 0.8);
+    }
 
-        /* Feature Section */
-        .features {
-            background-color: #f8f9fa;
-            padding: 80px 0;
-            text-align: center;
-        }
-        .features h2 {
-            font-size: 36px;
-            font-weight: 700;
-            color: #0d47a1;
-            margin-bottom: 40px;
-        }
-        .feature-card {
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            padding: 30px;
-            background-color: #ffffff;
-            transition: 0.3s;
-        }
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 18px rgba(0,0,0,0.15);
-        }
-        .feature-card img {
-            width: 80px;
-            margin-bottom: 15px;
-        }
-        .feature-card h5 {
-            font-weight: 600;
-            color: #007bff;
-            margin-top: 10px;
-        }
-        .feature-card p {
-            color: #4b5563;
-            font-size: 15px;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #007bff;
-            color: white;
-            text-align: center;
-            padding: 15px;
-            font-size: 14px;
-        }
-    </style>
+    .nav-link:hover::after {
+      width: 70%;
+    }
+  </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col relative">
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand" href="#">EduLearn</a>
-            <div>
-                <a href="/home" class="nav-link d-inline">Home</a>
-            </div>
-        </div>
-    </nav>
+  <!-- Background stars -->
+  <div class="absolute inset-0 overflow-hidden z-0">
+    <div class="star" style="top:10%; left:20%; animation-delay:0s"></div>
+    <div class="star" style="top:40%; left:80%; animation-delay:1s"></div>
+    <div class="star" style="top:70%; left:60%; animation-delay:2s"></div>
+    <div class="star" style="top:30%; left:50%; animation-delay:0.5s"></div>
+    <div class="star" style="top:80%; left:10%; animation-delay:1.5s"></div>
+  </div>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <h1>Selamat Datang di EduLearn 🎓</h1>
-        <p>Platform belajar online interaktif yang membantu kamu mengembangkan keterampilan baru di mana pun dan kapan pun.</p>
-        <a href="#" class="btn btn-custom">Mulai Belajar Sekarang</a>
-    </section>
+  <!-- Navbar -->
+  <nav class="bg-gradient-to-r from-indigo-700 via-blue-700 to-indigo-600 text-white shadow-lg py-4 relative z-10">
+    <div class="container mx-auto flex justify-between items-center px-6">
+      <h1 class="text-2xl title-font tracking-wide flex items-center gap-2">
+        📘 <span>EduLearn Library</span>
+      </h1>
+      <a href="/" class="nav-link"> Beranda</a>
+    </div>
+  </nav>
 
-    <!-- Footer -->
-    <footer>
-        <p>© {{ date('Y') }} EduLearn | Dibuat dengan ❤ untuk Pembelajar Indonesia</p>
-    </footer>
+  <!-- Hero -->
+  <header class="text-center mt-12 mb-8 relative z-10">
+    <h2 class="text-5xl title-font font-bold text-indigo-900 drop-shadow-lg">Perpustakaan Digital EduLearn</h2>
+    <div class="flex justify-center my-3">
+      <div class="w-24 h-1 bg-gradient-to-r from-indigo-500 via-blue-400 to-indigo-500 rounded-full shadow-md"></div>
+    </div>
+    <p class="text-gray-700 text-lg italic">Sumber pengetahuan modern untuk mendukung proses belajar tanpa batas 📚</p>
+  </header>
 
-    <!-- Script Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Daftar Buku -->
+  <main class="flex-grow flex justify-center items-start relative z-10">
+    <div class="glass magic-border rounded-2xl p-8 w-11/12 md:w-3/4 lg:w-2/3 mb-12 shadow-xl">
+      <table class="w-full border-collapse text-center">
+        <thead>
+          <tr class="bg-gradient-to-r from-indigo-600 to-blue-600 text-white rounded-t-xl">
+            <th class="py-3 px-4">#</th>
+            <th class="py-3 px-4">Judul Buku</th>
+            <th class="py-3 px-4">Penulis</th>
+            <th class="py-3 px-4">Tahun Terbit</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach($books as $index => $book)
+            <tr class="border-b hover:bg-indigo-100 hover:shadow-lg hover:scale-[1.01] transition transform duration-200">
+              <td class="py-3 px-4 font-semibold text-indigo-700">{{ $index + 1 }}</td>
+              <td class="py-3 px-4 text-gray-800">{{ $book['judul'] }}</td>
+              <td class="py-3 px-4 text-gray-700">{{ $book['penulis'] }}</td>
+              <td class="py-3 px-4 text-gray-700">{{ $book['tahun'] }}</td>
+            </tr>
+          @endforeach
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gradient-to-r from-indigo-700 to-blue-700 text-white text-center py-5 mt-auto relative z-10 shadow-inner">
+    <p class="italic">© {{ date('Y') }} EduLearn | Belajar Cerdas, Menjelajah Ilmu Tanpa Batas 🌍</p>
+  </footer>
+
 </body>
 </html>
