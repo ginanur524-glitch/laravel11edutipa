@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $books = [
             ['judul' => 'Laravel untuk Pemula', 'penulis' => 'Andi Saputra', 'tahun' => 2023],
@@ -16,6 +16,18 @@ class HomeController extends Controller
             ['judul' => 'Membangun Web Dinamis', 'penulis' => 'Budi Santoso', 'tahun' => 2024],
         ];
 
-        return view('home', compact('books'));
+        $message = session('message', "✨ Selamat datang di EduLearn Library! 🌟 Nikmati perjalanan membaca dan temukan inspirasi baru setiap hari.");
+
+        return view('home', compact('books', 'message'));
+    }
+
+    public function sendMessage(Request $request)
+    {
+        $request->validate([
+            'message' => 'required|string|max:255',
+        ]);
+
+        // Tidak mengirim notifikasi sukses, langsung kembali ke halaman utama
+        return redirect()->route('home');
     }
 }

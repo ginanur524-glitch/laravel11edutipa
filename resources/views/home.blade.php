@@ -16,90 +16,70 @@
       font-family: 'Playfair Display', serif;
     }
     .glass {
-      background: rgba(255, 255, 255, 0.75);
+      background: rgba(255, 255, 255, 0.78);
       backdrop-filter: blur(10px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
     }
     .magic-border {
       border: 1px solid rgba(147, 197, 253, 0.6);
     }
-    .star {
-      position: absolute;
-      width: 3px;
-      height: 3px;
-      background: white;
-      border-radius: 50%;
-      opacity: 0.8;
-      animation: twinkle 3s infinite ease-in-out;
-    }
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.3; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.4); }
-    }
-
-    .nav-link {
-      position: relative;
-      padding: 0.5rem 1rem;
-      transition: all 0.3s ease;
-      font-weight: 500;
-      letter-spacing: 0.5px;
-    }
-
-    .nav-link::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 0%;
-      height: 2px;
-      background: linear-gradient(to right, #a5b4fc, #93c5fd);
-      transition: all 0.4s ease;
-      border-radius: 2px;
-    }
-
-    .nav-link:hover {
-      color: #e0e7ff;
-      text-shadow: 0 0 8px rgba(165, 180, 252, 0.8);
-    }
-
-    .nav-link:hover::after {
-      width: 70%;
-    }
   </style>
 </head>
-<body class="min-h-screen flex flex-col relative">
+<body class="min-h-screen flex flex-col">
 
-  <!-- Background stars -->
-  <div class="absolute inset-0 overflow-hidden z-0">
-    <div class="star" style="top:10%; left:20%; animation-delay:0s"></div>
-    <div class="star" style="top:40%; left:80%; animation-delay:1s"></div>
-    <div class="star" style="top:70%; left:60%; animation-delay:2s"></div>
-    <div class="star" style="top:30%; left:50%; animation-delay:0.5s"></div>
-    <div class="star" style="top:80%; left:10%; animation-delay:1.5s"></div>
-  </div>
-
-  <!-- Navbar -->
-  <nav class="bg-gradient-to-r from-indigo-700 via-blue-700 to-indigo-600 text-white shadow-lg py-4 relative z-10">
+  <!-- 🔹 NAVBAR -->
+  <nav class="bg-gradient-to-r from-indigo-700 via-blue-700 to-indigo-600 text-white shadow-lg py-4">
     <div class="container mx-auto flex justify-between items-center px-6">
       <h1 class="text-2xl title-font tracking-wide flex items-center gap-2">
         📘 <span>EduLearn Library</span>
       </h1>
-      <a href="/" class="nav-link"> Beranda</a>
+      <a href="/" class="hover:underline">Beranda</a>
     </div>
   </nav>
 
-  <!-- Hero -->
-  <header class="text-center mt-12 mb-8 relative z-10">
-    <h2 class="text-5xl title-font font-bold text-indigo-900 drop-shadow-lg">Perpustakaan Digital EduLearn</h2>
+  <!-- 🔹 HEADER -->
+  <header class="text-center mt-12 mb-8">
+    <h2 class="text-5xl title-font font-bold text-indigo-900">Perpustakaan Digital EduLearn</h2>
     <div class="flex justify-center my-3">
       <div class="w-24 h-1 bg-gradient-to-r from-indigo-500 via-blue-400 to-indigo-500 rounded-full shadow-md"></div>
     </div>
-    <p class="text-gray-700 text-lg italic">Sumber pengetahuan modern untuk mendukung proses belajar tanpa batas 📚</p>
+    <p class="text-gray-700 text-lg italic leading-relaxed">
+      Sumber pengetahuan modern untuk mendukung proses belajar tanpa batas 📚<br>
+      <span class="text-indigo-800 font-medium">
+        💬 Kirim pesanmu dan jadilah bagian dari komunitas pembelajar EduLearn!
+      </span>
+    </p>
   </header>
 
-  <!-- Daftar Buku -->
-  <main class="flex-grow flex justify-center items-start relative z-10">
+  <!-- 💌 FORM KIRIM PESAN -->
+  <!-- 💌 Form kirim pesan -->
+<section class="flex flex-col items-center mt-6 mb-6">
+  <div class="bg-white/70 backdrop-blur-lg border border-indigo-100 rounded-xl px-6 py-4 w-11/12 md:w-2/3 lg:w-1/2 shadow-md">
+    <p class="text-center text-indigo-800 font-semibold text-base bg-indigo-100 px-4 py-2 rounded-full shadow-sm border border-indigo-200 mb-3">
+      🌟 Selamat datang di <span class="font-bold">EduLearn Library!</span> 🌟
+    </p>
+
+    <form action="{{ route('send.message') }}" method="POST" class="flex justify-center items-center gap-3">
+      @csrf
+      <input 
+        type="text" 
+        name="message" 
+        placeholder="Tulis pesanmu di sini..." 
+        class="border border-indigo-300 rounded-full px-4 py-2 w-3/4 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition text-sm"
+      >
+      <button 
+        type="submit" 
+        class="bg-indigo-600 text-white px-5 py-2 rounded-full hover:bg-indigo-700 transition font-medium shadow-sm text-sm">
+        Kirim
+      </button>
+    </form>
+  </div>
+</section>
+
+
+
+  <!-- 📚 DAFTAR BUKU -->
+  <main class="flex-grow flex justify-center items-start">
     <div class="glass magic-border rounded-2xl p-8 w-11/12 md:w-3/4 lg:w-2/3 mb-12 shadow-xl">
       <table class="w-full border-collapse text-center">
         <thead>
@@ -112,7 +92,7 @@
         </thead>
         <tbody>
           @foreach($books as $index => $book)
-            <tr class="border-b hover:bg-indigo-100 hover:shadow-lg hover:scale-[1.01] transition transform duration-200">
+            <tr class="border-b hover:bg-indigo-100 transition duration-200">
               <td class="py-3 px-4 font-semibold text-indigo-700">{{ $index + 1 }}</td>
               <td class="py-3 px-4 text-gray-800">{{ $book['judul'] }}</td>
               <td class="py-3 px-4 text-gray-700">{{ $book['penulis'] }}</td>
@@ -124,8 +104,8 @@
     </div>
   </main>
 
-  <!-- Footer -->
-  <footer class="bg-gradient-to-r from-indigo-700 to-blue-700 text-white text-center py-5 mt-auto relative z-10 shadow-inner">
+  <!-- 🔹 FOOTER -->
+  <footer class="bg-gradient-to-r from-indigo-700 to-blue-700 text-white text-center py-5 mt-auto shadow-inner">
     <p class="italic">© {{ date('Y') }} EduLearn | Belajar Cerdas, Menjelajah Ilmu Tanpa Batas 🌍</p>
   </footer>
 

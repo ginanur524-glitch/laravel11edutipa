@@ -9,3 +9,4 @@ Route::get('/', function () {
 
 // Gunakan hanya route controller untuk /home
 Route::get('/home', [HomeController::class, 'index']);
+Route::post('/send-message', [HomeController::class, 'sendMessage'])->name('send.message');
