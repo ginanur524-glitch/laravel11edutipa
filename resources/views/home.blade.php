@@ -77,34 +77,28 @@
   </div>
 </section>
 
-
-
-  <!-- 📚 DAFTAR BUKU -->
-  <div class="glass magic-border rounded-2xl p-5 w-10/12 md:w-3/4 lg:w-2/3 mb-8 shadow-lg mx-auto">
-  <h2 class="text-2xl font-semibold text-indigo-900 text-center mb-3">📚 Daftar Buku</h2>
-  <table class="w-full border-collapse text-center text-base">
-    <thead>
-      <tr class="bg-indigo-100 text-indigo-800">
-        <th class="border border-indigo-300 px-4 py-3">Judul</th>
-        <th class="border border-indigo-300 px-4 py-3">Penulis</th>
-        <th class="border border-indigo-300 px-4 py-3">Tahun</th>
-      </tr>
-    </thead>
-    <tbody>
-      @foreach($books as $book)
-      <tr class="hover:bg-indigo-50 transition">
-        <td class="border border-indigo-200 px-4 py-3">{{ $book['judul'] }}</td>
-        <td class="border border-indigo-200 px-4 py-3">{{ $book['penulis'] }}</td>
-        <td class="border border-indigo-200 px-4 py-3">{{ $book['tahun'] }}</td>
-      </tr>
-      @endforeach
-    </tbody>
-  </table>
+<!-- 📚 DAFTAR BUKU -->
+<div class="glass magic-border rounded-2xl p-5 w-10/12 md:w-3/4 lg:w-2/3 mb-8 shadow-lg mx-auto">
+  <h2 class="text-2xl font-semibold text-indigo-900 text-center mb-6">📚 Daftar Buku</h2>
+  
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    @foreach($books as $book)
+    <div class="bg-white rounded-xl shadow-md p-4 hover:scale-105 transition transform">
+      <div class="h-52 bg-indigo-100 rounded-lg flex items-center justify-center mb-3 text-indigo-800 font-semibold text-base">
+        {{-- Bisa ganti icon 📖 dengan gambar buku --}}
+        📖
+      </div>
+      <h3 class="font-bold text-indigo-900 text-sm mb-1">{{ $book['judul'] }}</h3>
+      <p class="text-indigo-700 text-xs mb-1">Penulis: {{ $book['penulis'] }}</p>
+      <p class="text-indigo-700 text-xs">Tahun: {{ $book['tahun'] }}</p>
+    </div>
+    @endforeach
+  </div>
 </div>
 
 
 
-  <!-- 🔹 FOOTER -->
+ <!-- 🔹 FOOTER -->
   <footer class="bg-gradient-to-r from-indigo-700 to-blue-700 text-white text-center py-5 mt-auto shadow-inner">
     <p class="italic">© {{ date('Y') }} EduLearn | Belajar Cerdas, Menjelajah Ilmu Tanpa Batas 🌍</p>
   </footer>
