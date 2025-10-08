@@ -55,9 +55,10 @@
   <!-- 💌 Form kirim pesan -->
 <section class="flex flex-col items-center mt-6 mb-6">
   <div class="bg-white/70 backdrop-blur-lg border border-indigo-100 rounded-xl px-6 py-4 w-11/12 md:w-2/3 lg:w-1/2 shadow-md">
-    <p class="text-center text-indigo-800 font-semibold text-base bg-indigo-100 px-4 py-2 rounded-full shadow-sm border border-indigo-200 mb-3">
-      🌟 Selamat datang di <span class="font-bold">EduLearn Library!</span> 🌟
-    </p>
+  <p class="text-center text-indigo-800 font-semibold text-lg bg-indigo-100 px-5 py-3 rounded-full shadow-sm border border-indigo-200 mb-3">
+    🌟 Selamat datang di <span class="font-bold">EduLearn Library!</span> 🌟
+  </p>
+
 
     <form action="{{ route('send.message') }}" method="POST" class="flex justify-center items-center gap-3">
       @csrf
@@ -79,30 +80,29 @@
 
 
   <!-- 📚 DAFTAR BUKU -->
-  <main class="flex-grow flex justify-center items-start">
-    <div class="glass magic-border rounded-2xl p-8 w-11/12 md:w-3/4 lg:w-2/3 mb-12 shadow-xl">
-      <table class="w-full border-collapse text-center">
-        <thead>
-          <tr class="bg-gradient-to-r from-indigo-600 to-blue-600 text-white rounded-t-xl">
-            <th class="py-3 px-4">#</th>
-            <th class="py-3 px-4">Judul Buku</th>
-            <th class="py-3 px-4">Penulis</th>
-            <th class="py-3 px-4">Tahun Terbit</th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach($books as $index => $book)
-            <tr class="border-b hover:bg-indigo-100 transition duration-200">
-              <td class="py-3 px-4 font-semibold text-indigo-700">{{ $index + 1 }}</td>
-              <td class="py-3 px-4 text-gray-800">{{ $book['judul'] }}</td>
-              <td class="py-3 px-4 text-gray-700">{{ $book['penulis'] }}</td>
-              <td class="py-3 px-4 text-gray-700">{{ $book['tahun'] }}</td>
-            </tr>
-          @endforeach
-        </tbody>
-      </table>
-    </div>
-  </main>
+  <div class="glass magic-border rounded-2xl p-5 w-10/12 md:w-3/4 lg:w-2/3 mb-8 shadow-lg mx-auto">
+  <h2 class="text-2xl font-semibold text-indigo-900 text-center mb-3">📚 Daftar Buku</h2>
+  <table class="w-full border-collapse text-center text-base">
+    <thead>
+      <tr class="bg-indigo-100 text-indigo-800">
+        <th class="border border-indigo-300 px-4 py-3">Judul</th>
+        <th class="border border-indigo-300 px-4 py-3">Penulis</th>
+        <th class="border border-indigo-300 px-4 py-3">Tahun</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach($books as $book)
+      <tr class="hover:bg-indigo-50 transition">
+        <td class="border border-indigo-200 px-4 py-3">{{ $book['judul'] }}</td>
+        <td class="border border-indigo-200 px-4 py-3">{{ $book['penulis'] }}</td>
+        <td class="border border-indigo-200 px-4 py-3">{{ $book['tahun'] }}</td>
+      </tr>
+      @endforeach
+    </tbody>
+  </table>
+</div>
+
+
 
   <!-- 🔹 FOOTER -->
   <footer class="bg-gradient-to-r from-indigo-700 to-blue-700 text-white text-center py-5 mt-auto shadow-inner">
